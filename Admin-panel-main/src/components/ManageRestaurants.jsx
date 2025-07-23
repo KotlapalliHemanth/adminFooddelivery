@@ -13,7 +13,7 @@ function ManageRestaurants() {
         const res = await api.get("/admin/restaurants");
         const mapped = res.data.map((r) => ({
           id: r.id,
-          name: r.name,
+          name: r.restaurantName, // fixed: use restaurantName from backend
           address: r.address,
           phone: r.phone,
           status: r.enabled ? "Open" : "Closed",
@@ -92,20 +92,24 @@ function ManageRestaurants() {
                     editingId === restaurant.id ? (
                       <tr key={restaurant.id} className="bg-orange-50">
                         <td className="py-3 px-6">
-                    <img
-                      src={restaurant.image}
-                      alt={`Front view of ${restaurant.name} restaurant with signage`}
-                      className="h-16 w-16 object-cover rounded"
-                          />
+                          {restaurant.image ? (
+                            <img
+                              src={restaurant.image}
+                              alt={`Front view of ${restaurant.name || 'N/A'} restaurant with signage`}
+                              className="h-16 w-16 object-cover rounded"
+                            />
+                          ) : (
+                            <span>N/A</span>
+                          )}
                         </td>
-                  <td className="py-3 px-6">{restaurant.name}</td>
-                  <td className="py-3 px-6">{restaurant.address}</td>
-                  <td className="py-3 px-6">{restaurant.phone}</td>
+                        <td className="py-3 px-6">{restaurant.name ? restaurant.name : 'N/A'}</td>
+                        <td className="py-3 px-6">{restaurant.address ? restaurant.address : 'N/A'}</td>
+                        <td className="py-3 px-6">{restaurant.phone ? restaurant.phone : 'N/A'}</td>
                         <td className="py-3 px-6">
                           <select
                             name="status"
-                      value={statusValue}
-                      onChange={handleStatusChange}
+                            value={statusValue}
+                            onChange={handleStatusChange}
                             className="w-full border border-gray-300 rounded px-2 py-1"
                           >
                             <option>Open</option>
@@ -135,29 +139,33 @@ function ManageRestaurants() {
                         className="border-b last:border-b-0 hover:bg-orange-50"
                       >
                         <td className="py-3 px-6">
-                          <img
-                            src={restaurant.image}
-                            alt={`Front view of ${restaurant.name} restaurant with signage`}
-                            className="h-16 w-16 object-cover rounded"
-                          />
+                          {restaurant.image ? (
+                            <img
+                              src={restaurant.image}
+                              alt={`Front view of ${restaurant.name || 'N/A'} restaurant with signage`}
+                              className="h-16 w-16 object-cover rounded"
+                            />
+                          ) : (
+                            <span>N/A</span>
+                          )}
                         </td>
-                        <td className="py-3 px-6">{restaurant.name}</td>
-                        <td className="py-3 px-6">{restaurant.address}</td>
-                        <td className="py-3 px-6">{restaurant.phone}</td>
+                        <td className="py-3 px-6">{restaurant.name ? restaurant.name : 'N/A'}</td>
+                        <td className="py-3 px-6">{restaurant.address ? restaurant.address : 'N/A'}</td>
+                        <td className="py-3 px-6">{restaurant.phone ? restaurant.phone : 'N/A'}</td>
                         <td
                           className={`py-3 px-6 font-semibold ${
-                            restaurant.status === "Open"
-                              ? "text-green-600"
-                              : "text-red-600"
+                            restaurant.status === 'Open'
+                              ? 'text-green-600'
+                              : 'text-red-600'
                           }`}
                         >
-                          {restaurant.status}
+                          {restaurant.status ? restaurant.status : 'N/A'}
                         </td>
                         <td className="py-3 px-6 text-center space-x-2">
                           <button
                             onClick={() => openEdit(restaurant)}
                             className="text-blue-600 hover:text-blue-800"
-                      title="Edit Status"
+                            title="Edit Status"
                           >
                             <i className="fas fa-edit"></i>
                           </button>

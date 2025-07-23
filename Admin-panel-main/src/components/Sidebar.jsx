@@ -4,7 +4,6 @@ const menuItems = [
           { name: "Manage Users", icon: "fas fa-users", comp: "ManageUsers" },
           { name: "Manage Orders", icon: "fas fa-shopping-cart", comp: "ManageOrders" },
           { name: "Manage Restaurants", icon: "fas fa-utensils", comp: "ManageRestaurants" },
-          { name: "Report & Analysis", icon: "fas fa-chart-line", comp: "ReportAnalysis" },
           { name: "Logout", icon: "fas fa-sign-out-alt", comp: "Logout" },
         ];
 
